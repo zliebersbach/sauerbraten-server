@@ -1,0 +1,50 @@
+#!/bin/zsh
+
+NAME=sauerbraten-server
+GAME_DIR=/usr/games/sauerbraten
+GAME_EXEC=linux_64_server
+GAME_PATH=$GAME_DIR/bin_unix/$GAME_EXEC
+GAME_LOG=/var/log/$NAME
+
+view_log() {
+	tail -f $GAME_LOG
+}
+do_start() {
+	pidof -s $GAME_EXEC > /dev/null
+	if [ $? -ne 0 ]; then
+		nohup $GAME_PATH -q$GAME_DIR >> $GAME_LOG &
+	; fi
+}
+do_stop() {
+	kill $(pidof -s $GAME_EXEC)
+}
+
+case "$1" in
+	start)
+		echo -n Starting $NAME
+		do_start
+		echo .
+		;;
+	stop)
+		echo -n Stopping $NAME
+		do_stop
+		echo .
+		;;
+	restart)
+		echo -n Restarting $NAME
+		do_stop
+		do_start
+		echo .
+		;;
+	run)
+		echo -n Running $NAME
+		touch $GAME_LOG
+		do_start
+		echo .
+		view_log
+		;;
+	*)
+		echo Usage: $NAME "{start|stop|restart|run}"
+		exit 1
+		;;
+esac

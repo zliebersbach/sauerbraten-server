@@ -1,0 +1,11 @@
+[Unit]
+Description=Starts a Sauerbraten server.
+
+[Service]
+Type=forking
+ExecStart=/root/bin/sauerbraten-server start
+ExecStop=/root/bin/sauerbraten-server stop
+ExecReload=/root/bin/sauerbraten-server restart
+
+[Install]
+WantedBy=multi-user.target
