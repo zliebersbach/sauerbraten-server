@@ -21,6 +21,8 @@ GAME_DIR=/usr/games/sauerbraten
 GAME_EXEC=linux_64_server
 GAME_PATH=$GAME_DIR/bin_unix/$GAME_EXEC
 GAME_LOG=/var/log/$NAME
+GAME_CFG=$GAME_DIR/server-init.cfg
+TIMESTAMP=/tmp/timestamp
 
 view_log() {
 	tail -f $GAME_LOG
@@ -29,10 +31,24 @@ do_start() {
 	pidof -s $GAME_EXEC > /dev/null
 	if [ $? -ne 0 ]; then
 		nohup $GAME_PATH -q$GAME_DIR >> $GAME_LOG &
-	; fi
+	fi
 }
 do_stop() {
 	kill $(pidof -s $GAME_EXEC)
+}
+do_restart() {
+	do_stop
+	do_start
+}
+edit_cfg() {
+	touch $TIMESTAMP
+	$EDITOR $GAME_CFG
+	if [ $GAME_CFG -nt $TIMESTAMP ]; then
+		echo Restarting $NAME due to configuration changes
+		do_restart
+		echo .
+	fi
+	rm $TIMESTAMP
 }
 
 case "$1" in
@@ -48,8 +64,7 @@ case "$1" in
 		;;
 	restart)
 		echo -n Restarting $NAME
-		do_stop
-		do_start
+		do_restart
 		echo .
 		;;
 	run)
@@ -59,8 +74,11 @@ case "$1" in
 		echo .
 		view_log
 		;;
+	edit-config)
+		edit_cfg
+		;;
 	*)
-		echo Usage: $NAME "{start|stop|restart|run}"
+		echo Usage: $NAME "{start|stop|restart|run|edit-config}"
 		exit 1
 		;;
 esac
