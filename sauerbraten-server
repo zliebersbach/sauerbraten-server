@@ -30,7 +30,7 @@ view_log() {
 do_start() {
 	pidof -s $GAME_EXEC > /dev/null
 	if [ $? -ne 0 ]; then
-		nohup $GAME_PATH -q$GAME_DIR >> $GAME_LOG &
+		nohup $GAME_PATH -q$GAME_DIR >> $GAME_LOG 2>&1 &
 	fi
 }
 do_stop() {
@@ -44,7 +44,7 @@ edit_cfg() {
 	touch $TIMESTAMP
 	$EDITOR $GAME_CFG
 	if [ $GAME_CFG -nt $TIMESTAMP ]; then
-		echo Restarting $NAME due to configuration changes
+		echo -n Restarting $NAME due to configuration changes
 		do_restart
 		echo .
 	fi
