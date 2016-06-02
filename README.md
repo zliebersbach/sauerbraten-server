@@ -24,7 +24,7 @@ Finally, unzip the download and change into the directory by running:
 This section aims to give tips as to what to change in order to get `sauerbraten-server` to work in your environment.
 
 #### `makefile`
-Set `SCRIPT_DIR` to the location that you would like to install the script. It is preferable if it is somewhere in your `PATH`. Leaving it set to the default value is recommended. Defaults to `/root/bin`.
+Set `SCRIPT_DIR` to the location that you would like to install the script. It is preferable if it is somewhere in your `PATH`. Leaving it set to the default value is recommended. Defaults to `/usr/local/bin`.
 
 Set `SERVICE_DIR` to the directory where `systemd` searches for service files. Defaults to `/etc/systemd/system` (the default on most systems).
 
@@ -36,7 +36,7 @@ Set `GAME_EXEC` to the name of the binary for your system (`linux_server` for 32
 Alter `GAME_LOG` to the directory where you want to store the server log. Defaults to `/var/log/$NAME`.
 
 #### `sauerbraten-server.service`
-Alter the `ExecStart`, `ExecStop` and `ExecReload` paramaters of the `[Service]` section to point to the location of the `sauerbraten-server` script. You will only need to change this if you altered `SCRIPT_DIR` in the makefile. Defaults to `/root/bin/sauerbraten-server`.
+Alter the `ExecStart`, `ExecStop` and `ExecReload` paramaters of the `[Service]` section to point to the location of the `sauerbraten-server` script. You will only need to change this if you altered `SCRIPT_DIR` in the makefile. Defaults to `/usr/local/bin/sauerbraten-server`.
 
 ### Installation
 To install `sauerbraten-server`, simply execute the following command (while still logged in as root):

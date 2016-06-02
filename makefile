@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with sauerbraten-server.  If not, see <http://www.gnu.org/licenses/>.
 
-SCRIPT_DIR=/root/bin
+SCRIPT_DIR=/usr/local/bin
 SERVICE_DIR=/etc/systemd/system
 
 install-script: sauerbraten-server
