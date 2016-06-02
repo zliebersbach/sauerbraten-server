@@ -20,6 +20,8 @@ Finally, unzip the download and change into the directory by running:
 
 	unzip master.zip && cd sauerbraten-server-master
 
+You should also have the `$EDITOR` environment variable set.
+
 ### Configuration
 This section aims to give tips as to what to change in order to get `sauerbraten-server` to work in your environment.
 
@@ -51,6 +53,7 @@ The command line script has 4 options:
  - `stop` - stops the server.
  - `restart` - restarts the server (useful after editing configuration files).
  - `run` - starts the server if it isn't already running and shows the log file.
+ - `edit-config` - opens the server configuration file and restarts the server if the file was changed.
 
 If you are using `systemd`, it is not recommended (or tested for that matter) to use the CLI script to control the server. You should use the `systemd` commands show [below](#systemd).
 
