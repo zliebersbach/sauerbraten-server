@@ -28,3 +28,7 @@ install-service: sauerbraten-server.service
 	systemctl enable sauerbraten-server
 
 install: install-script install-service
+
+uninstall:
+	rm $(SCRIPT_DIR)/sauerbraten-server
+	rm $(SERVICE_DIR)/sauerbraten-server.service
