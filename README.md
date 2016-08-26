@@ -1,12 +1,12 @@
 # sauerbraten-server
-A `systemd` service and `zsh` script to manage a Sauerbraten (Cube 2) server in the background.
+A `systemd` service and `bash` script to manage a Sauerbraten (Cube 2) server in the background.
 
 ## Installation
 
 ### Prerequisites
 Before you start, make sure that your system meets the following requirements:
  - Uses `systemd` (`apt-get install systemd`)
- - Has `zsh` installed (`apt-get install zsh`)
+ - Has `bash` installed (`apt-get install bash`)
  - Has `make` installed (`apt-get install make`)
  - Has `unzip` installed (`apt-get install unzip`)
  - Has root access
@@ -65,7 +65,7 @@ The Sauerbraten server is automatically configured to start on boot by the makef
 
 ## License
 
-    sauerbraten-server, a systemd service and zsh script to manage a Sauerbraten
+    sauerbraten-server, a systemd service and bash script to manage a Sauerbraten
    	(Cube 2) server in the background.
     Copyright (C) 2016  Kevin Boxhoorn
 
