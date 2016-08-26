@@ -9,13 +9,14 @@ Before you start, make sure that your system meets the following requirements:
  - Has `bash` installed (`apt-get install bash`)
  - Has `make` installed (`apt-get install make`)
  - Has `unzip` installed (`apt-get install unzip`)
+ - Has logrotate installed (`apt-get install logrotate`)
  - Has root access
  - And of course, a working installation of [Sauerbraten](http://sauerbraten.org/)
 
 To begin, log into your system as the root user. Then, download the source code by entering the following command into your console:
 
 	wget https://github.com/wincinderith/sauerbraten-server/archive/master.zip
-	
+
 Finally, unzip the download and change into the directory by running:
 
 	unzip master.zip && cd sauerbraten-server-master
@@ -35,7 +36,10 @@ Change `GAME_DIR` to the directory of your Sauerbraten installation. Defaults to
 
 Set `GAME_EXEC` to the name of the binary for your system (`linux_server` for 32-bit systems and `linux_64_server` for 64-bit systems). Defaults to `linux_64_server`.
 
-Alter `GAME_LOG` to the directory where you want to store the server log. Defaults to `/var/log/$NAME`.
+Alter `GAME_LOG` to the directory where you want to store the server log. Defaults to `/var/log/$NAME.log`.
+
+#### `sauerbraten-server.conf`
+Alter the log name to whatever `GAME_LOG` is set to in `sauerbraten-server`.
 
 #### `sauerbraten-server.service`
 Alter the `ExecStart`, `ExecStop` and `ExecReload` paramaters of the `[Service]` section to point to the location of the `sauerbraten-server` script. You will only need to change this if you altered `SCRIPT_DIR` in the makefile. Defaults to `/usr/local/bin/sauerbraten-server`.
