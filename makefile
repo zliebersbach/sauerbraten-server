@@ -15,25 +15,29 @@
 # You should have received a copy of the GNU General Public License
 # along with sauerbraten-server.  If not, see <http://www.gnu.org/licenses/>.
 
+NAME=sauerbraten-server
 SCRIPT_DIR=/usr/local/bin
 SERVICE_DIR=/etc/systemd/system
 LOGROTATE_DIR=/etc/logrotate.d
 
-install-script: sauerbraten-server
+.PHONY: install-script install-service install-logrotate install uninstall
+
+install-script: $(NAME)
 	mkdir -pv $(SCRIPT_DIR)
-	cp -v sauerbraten-server $(SCRIPT_DIR)
+	cp -v $< $(SCRIPT_DIR)
 
-install-service: sauerbraten-server.service
-	cp -v sauerbraten-server.service $(SERVICE_DIR)
+install-service: $(NAME).service
+	cp -v $< $(SERVICE_DIR)
 	systemctl daemon-reload
-	systemctl enable sauerbraten-server
+	systemctl enable $(NAME)
 
-install-logrotate: sauerbraten-server.conf
+install-logrotate: $(NAME).conf
 	cp -v $< $(LOGROTATE_DIR)
 	logrotate -d $(LOGROTATE_DIR)/$<
 
 install: install-script install-service install-logrotate
 
 uninstall:
-	rm $(SCRIPT_DIR)/sauerbraten-server
-	rm $(SERVICE_DIR)/sauerbraten-server.service
+	rm -fv $(SCRIPT_DIR)/$(NAME)
+	rm -fv $(SERVICE_DIR)/$(NAME).service
+	rm -fv $(LOGROTATE_DIR)/$(NAME).conf
